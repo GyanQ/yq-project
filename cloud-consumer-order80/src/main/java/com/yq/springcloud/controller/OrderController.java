@@ -39,12 +39,12 @@ public class OrderController {
         return paymentFeign.getById(id);
     }
 
-    @PostMapping("/consumer/payment/add")
+    /*@PostMapping("/consumer/payment/add")
     @ApiOperation("新增")
     //@HystrixCommand
     public ResultModel<Payment> add(Payment payment) {
         return restTemplate.postForObject(PAYMENT_URL + "/payment/add", payment, ResultModel.class);
-    }
+    }*/
 
     public String GlobalDowngrade() {
         return "系统繁忙";

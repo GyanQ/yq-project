@@ -30,6 +30,7 @@ public class PaymentController {
     @GetMapping("/payment/getById/{id}")
     @ApiOperation("根据id查询")
     public ResultModel<Payment> getById(@PathVariable("id") Long id) {
+        int i = 10 / 0;
         return ResultUtil.success(paymentService.getById(id));
     }
 
