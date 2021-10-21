@@ -1,5 +1,7 @@
 package com.yq.springcloud.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.yq.springcloud.entity.Payment;
 import com.yq.springcloud.openfeign.payment8001.PaymentFeign;
 import com.yq.springcloud.utils.ResultModel;
@@ -19,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
  **/
 @RestController
 @Api(tags = {"消费者80"}, description = "消费者80")
+//@DefaultProperties(defaultFallback = "GlobalDowngrade")  //配置全局降级
 public class OrderController {
 
     private final static String PAYMENT_URL = "http://localhost:8001";
@@ -30,6 +33,7 @@ public class OrderController {
 
     @GetMapping("/consumer/payment/getById/{id}")
     @ApiOperation("查询")
+    //@HystrixCommand
     public ResultModel<Payment> getPaymentById(@PathVariable("id") Long id) {
         //return restTemplate.getForObject(PAYMENT_URL + "/payment/getById/" + id, ResultModel.class, id);
         return paymentFeign.getById(id);
@@ -37,7 +41,12 @@ public class OrderController {
 
     @PostMapping("/consumer/payment/add")
     @ApiOperation("新增")
+    //@HystrixCommand
     public ResultModel<Payment> add(Payment payment) {
         return restTemplate.postForObject(PAYMENT_URL + "/payment/add", payment, ResultModel.class);
+    }
+
+    public String GlobalDowngrade() {
+        return "系统繁忙";
     }
 }

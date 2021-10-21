@@ -1,6 +1,7 @@
 package com.yq.springcloud.controller;
 
 import com.yq.springcloud.entity.Payment;
+import com.yq.springcloud.request.PaymentRequest;
 import com.yq.springcloud.service.PaymentService;
 import com.yq.springcloud.utils.ResultModel;
 import com.yq.springcloud.utils.ResultUtil;
@@ -30,5 +31,17 @@ public class PaymentController {
     @ApiOperation("根据id查询")
     public ResultModel<Payment> getById(@PathVariable("id") Long id) {
         return ResultUtil.success(paymentService.getById(id));
+    }
+
+    @PostMapping("/payment/update")
+    @ApiOperation("修改")
+    public ResultModel update(@RequestBody PaymentRequest request) {
+        return ResultUtil.success(paymentService.update(request));
+    }
+
+    @DeleteMapping("/payment/delete")
+    @ApiOperation("删除")
+    public ResultModel delete(@RequestParam Long id) {
+        return ResultUtil.success(paymentService.delete(id));
     }
 }

@@ -12,6 +12,16 @@
     <artifactId>cloud-provider-payment8001</artifactId>
 
     <dependencies>
+        <!--        Hystrix-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-netflix-hystrix</artifactId>
+        </dependency>
+        <!--        使用hystrix需要额外引入这个依赖-->
+        <dependency>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-javanica</artifactId>
+        </dependency>
         <!--        eureka-client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

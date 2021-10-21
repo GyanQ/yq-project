@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author: Gyan
  * @create: 2021-10-20
  **/
-@FeignClient(name = "cloud-payment-service")
+@FeignClient(name = "cloud-payment-service", fallback = PaymentHandleException.class) //fallback 处理全局异常
 public interface PaymentFeign {
 
     @GetMapping("/payment/getById/{id}")
